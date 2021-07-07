@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "573435844327",
+    "firebase_url": "https://chat-toolbar-d63ad-default-rtdb.firebaseio.com",
+    "project_id": "chat-toolbar-d63ad",
+    "storage_bucket": "chat-toolbar-d63ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:573435844327:android:ba961f6647c9cb10f7f442",
+        "android_client_info": {
+          "package_name": "com.example.chat_toolbar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "573435844327-emq8u91nc693oe4rdaadpb60cva4kjqc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8kH0zIvx9ig01y2tA3HiuFo9PSOW9HwQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "573435844327-emq8u91nc693oe4rdaadpb60cva4kjqc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
