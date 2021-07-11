@@ -1,50 +1,36 @@
 package com.example.chat_toolbar.Adapter;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.chat_toolbar.Model.model;
+import com.example.chat_toolbar.Model.Post;
 import com.example.chat_toolbar.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.FirebaseDatabase;
-import com.orhanobut.dialogplus.DialogPlus;
-import com.orhanobut.dialogplus.ViewHolder;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewholder>
+public class postadapter extends FirebaseRecyclerAdapter<Post, postadapter.myviewholder>
 {
-    public myadapter(@NonNull FirebaseRecyclerOptions<model> options)
+    public postadapter(@NonNull FirebaseRecyclerOptions<Post> options)
     {
         super(options);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final myviewholder holder, final int position, @NonNull final model model)
+    protected void onBindViewHolder(@NonNull final myviewholder holder, final int position, @NonNull final Post post)
     {
-        holder.name.setText(model.getName());
-        holder.course.setText(model.getCourse());
-        holder.email.setText(model.getEmail());
-        Glide.with(holder.img.getContext()).load(model.getPurl()).into(holder.img);
-
+        holder.name.setText(post.getName());
+        holder.course.setText(post.getCourse());
+        holder.email.setText(post.getEmail());
+        Glide.with(holder.img.getContext()).load(post.getPurl()).into(holder.img);
 
 
     } // End of OnBindViewMethod
@@ -53,7 +39,7 @@ public class myadapter extends FirebaseRecyclerAdapter<model,myadapter.myviewhol
     @Override
     public myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.singlerow,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.poscard,parent,false);
         return new myviewholder(view);
     }
 

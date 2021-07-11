@@ -1,13 +1,13 @@
 package com.example.chat_toolbar.Model;
 
-public class model
+public class Post
 {
     String name,course,email,purl;
-    model()
+    Post()
     {
 
     }
-    public model(String name, String course, String email, String purl) {
+    public Post(String name, String course, String email, String purl) {
         this.name = name;
         this.course = course;
         this.email = email;

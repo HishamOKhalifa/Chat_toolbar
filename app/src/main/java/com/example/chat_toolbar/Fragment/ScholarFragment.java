@@ -2,64 +2,114 @@ package com.example.chat_toolbar.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.chat_toolbar.Adapter.scholaradapter;
+import com.example.chat_toolbar.Model.Scholar;
 import com.example.chat_toolbar.R;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.FirebaseDatabase;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ScholarFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ScholarFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public ScholarFragment() {
-        // Required empty public constructor
-    }
+    RecyclerView recview1;
+    scholaradapter adapter1;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ScholarFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ScholarFragment newInstance(String param1, String param2) {
-        ScholarFragment fragment = new ScholarFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_scholar, container, false);
+        View view= inflater.inflate(R.layout.fragment_scholar, container, false);
+
+        recview1=view.findViewById(R.id.recview1);
+        recview1.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        FirebaseRecyclerOptions<Scholar> options =
+                new FirebaseRecyclerOptions.Builder<Scholar>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Scholar"), Scholar.class)
+                        .build();
+
+        adapter1=new scholaradapter(options);
+        recview1.setAdapter(adapter1);
+
+
+
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter1.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter1.stopListening();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);//Make sure you have this line of code.
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // TODO Add your menu entries here
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.search,menu);
+
+        MenuItem item=menu.findItem(R.id.search);
+
+        SearchView searchView=(SearchView)item.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener()
+        {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+
+                processsearch(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                processsearch(s);
+                return false;
+            }
+        });
+
+
+
+    }
+
+
+    private void processsearch(String s)
+    {
+        FirebaseRecyclerOptions<Scholar> options =
+                new FirebaseRecyclerOptions.Builder<Scholar>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Scholar").orderByChild("title").startAt(s).endAt(s+"\uf8ff"), Scholar.class)
+                        .build();
+        adapter1=new scholaradapter(options);
+        adapter1.startListening();
+        recview1.setAdapter(adapter1);
     }
 }
