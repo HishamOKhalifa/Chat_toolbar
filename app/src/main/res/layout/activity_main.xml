@@ -7,16 +7,20 @@
     tools:context=".MainActivity"
     >
 
+
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/splash_screen"
+        android:layout_height="match_parent"
+        android:src="@mipmap/ic_gp_background"
+        android:background="#021223"
         android:id="@+id/Sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
         />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

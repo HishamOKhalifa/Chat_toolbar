@@ -33,6 +33,8 @@ public class postadapter extends FirebaseRecyclerAdapter<Post, postadapter.myvie
         Glide.with(holder.img.getContext()).load(post.getPurl()).into(holder.img);
 
 
+
+
     } // End of OnBindViewMethod
 
     @NonNull
@@ -48,13 +50,15 @@ public class postadapter extends FirebaseRecyclerAdapter<Post, postadapter.myvie
     {
         CircleImageView img;
         TextView name,course,email;
+
         public myviewholder(@NonNull View itemView)
         {
             super(itemView);
-            img=(CircleImageView) itemView.findViewById(R.id.img1);
-            name=(TextView)itemView.findViewById(R.id.nametext);
-            course=(TextView)itemView.findViewById(R.id.coursetext);
-            email=(TextView)itemView.findViewById(R.id.emailtext);
+            img=itemView.findViewById(R.id.img1);
+            name=itemView.findViewById(R.id.nametext);
+            course=itemView.findViewById(R.id.coursetext);
+            email=itemView.findViewById(R.id.emailtext);
+
 
 
         }

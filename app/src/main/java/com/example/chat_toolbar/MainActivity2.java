@@ -1,11 +1,11 @@
 package com.example.chat_toolbar;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,9 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
-
 import com.bumptech.glide.Glide;
-
 import com.example.chat_toolbar.Adapter.GPPagerAdaper;
 import com.example.chat_toolbar.Model.User;
 import com.google.android.material.badge.BadgeDrawable;
@@ -37,6 +35,7 @@ public class MainActivity2 extends AppCompatActivity {
     TextView username;
     FirebaseUser firebaseUser;
     DatabaseReference reference;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +119,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         profile_image=findViewById(R.id.profile_image);
         username=findViewById(R.id.username);
-
+        progressDialog = new ProgressDialog(this);
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
         reference= FirebaseDatabase.getInstance().getReference("Student").child(firebaseUser.getUid());
 
@@ -171,9 +170,12 @@ public class MainActivity2 extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.logout:
+                progressDialog.setMessage("Logout...");
+                progressDialog.show();
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(MainActivity2.this , StartActivity.class));
                 finish();
+
                 return true;
 
         }

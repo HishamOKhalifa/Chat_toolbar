@@ -2,16 +2,25 @@ package com.example.chat_toolbar.Model;
 
 public class Post
 {
-    String name,course,email,purl;
+    String id, name,course,email,purl;
     Post()
     {
 
     }
-    public Post(String name, String course, String email, String purl) {
+    public Post(String id, String name, String course, String email, String purl) {
+        this.id = id;
         this.name = name;
         this.course = course;
         this.email = email;
         this.purl = purl;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -38,6 +47,8 @@ public class Post
         this.email = email;
     }
 
+
+
     public String getPurl() {
         return purl;
     }
@@ -45,5 +56,7 @@ public class Post
     public void setPurl(String purl) {
         this.purl = purl;
     }
+
+
 }
 

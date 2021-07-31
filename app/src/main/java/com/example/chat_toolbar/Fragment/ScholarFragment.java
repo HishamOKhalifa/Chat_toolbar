@@ -24,8 +24,9 @@ public class ScholarFragment extends Fragment {
 
 
 
-    RecyclerView recview1;
+    RecyclerView recview1; //recview;
     scholaradapter adapter1;
+  //  postadapter adapter;
 
 
 
@@ -48,6 +49,16 @@ public class ScholarFragment extends Fragment {
         adapter1=new scholaradapter(options);
         recview1.setAdapter(adapter1);
 
+     //   recview=view.findViewById(R.id.recview);
+
+
+       /* FirebaseRecyclerOptions<Post> options1 =
+                new FirebaseRecyclerOptions.Builder<Post>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Company"), Post.class)
+                        .build();*/
+
+   //     adapter=new postadapter(options1);
+//        recview.setAdapter(adapter);
 
 
         return view;
@@ -57,12 +68,14 @@ public class ScholarFragment extends Fragment {
     public void onStart() {
         super.onStart();
         adapter1.startListening();
+      //  adapter.startListening();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         adapter1.stopListening();
+      //  adapter.stopListening();
     }
 
     @Override
@@ -87,13 +100,13 @@ public class ScholarFragment extends Fragment {
             public boolean onQueryTextSubmit(String s) {
 
                 processsearch(s);
-                return false;
+                return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
                 processsearch(s);
-                return false;
+                return true;
             }
         });
 
@@ -111,5 +124,6 @@ public class ScholarFragment extends Fragment {
         adapter1=new scholaradapter(options);
         adapter1.startListening();
         recview1.setAdapter(adapter1);
+
     }
 }

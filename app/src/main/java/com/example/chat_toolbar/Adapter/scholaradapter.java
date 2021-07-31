@@ -1,8 +1,11 @@
 package com.example.chat_toolbar.Adapter;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,7 +17,6 @@ import com.example.chat_toolbar.Model.Scholar;
 import com.example.chat_toolbar.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-
 
 
 public class scholaradapter extends FirebaseRecyclerAdapter<Scholar, scholaradapter.myviewholder>
@@ -31,6 +33,19 @@ public class scholaradapter extends FirebaseRecyclerAdapter<Scholar, scholaradap
         Glide.with(holder.image.getContext()).load(scholar.getImage()).into(holder.image);
 
 
+        holder.apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                Uri uri = Uri.parse(scholar.getLink());
+                view.getContext().startActivity(new Intent(Intent.ACTION_VIEW,uri));
+
+
+            }
+
+
+        });
     } // End of OnBindViewMethod
 
     @NonNull
@@ -46,11 +61,13 @@ public class scholaradapter extends FirebaseRecyclerAdapter<Scholar, scholaradap
     {
         ImageView image;
         TextView title;
+        Button apply;
         public myviewholder(@NonNull View itemView)
         {
             super(itemView);
             image= itemView.findViewById(R.id.image);
             title=itemView.findViewById(R.id.title);
+            apply = itemView.findViewById(R.id.apply);
 
 
 

@@ -2,18 +2,25 @@ package com.example.chat_toolbar.Model;
 
 public class Scholar {
 
-    String image, title;
+    String image, title, link;
 
     Scholar() {
 
     }
 
-    public Scholar(String image, String title) {
+    public Scholar(String image, String title, String link) {
         this.image = image;
         this.title = title;
 
     }
 
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 
     public String getImage() {
         return image;

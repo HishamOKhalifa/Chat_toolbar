@@ -48,8 +48,13 @@ public class CompanyFragment extends Fragment {
 
 
 
+
+
+
         return view;
     }
+
+
 
     @Override
     public void onStart() {
@@ -63,11 +68,15 @@ public class CompanyFragment extends Fragment {
         adapter.stopListening();
     }
 
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);//Make sure you have this line of code.
+        setHasOptionsMenu(true);//Make sure you have this line of code. and to show menu option in fragment
     }
+
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -84,20 +93,20 @@ public class CompanyFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String s) {
 
-                 processsearch(s);
+                processsearch(s);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-                  processsearch(s);
+                processsearch(s);
                 return true;
             }
         });
 
 
 
-        }
+    }
 
 
 
